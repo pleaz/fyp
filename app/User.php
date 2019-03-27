@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'surname', 'login', 'email', 'password', 'description',
     ];
 
     /**
@@ -36,4 +36,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function artist()
+    {
+        return $this->hasOne('App\Artist');
+    }
+
+    public function styles()
+    {
+        return $this->belongsToMany('App\Style', 'artist_styles');
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Artist', 'user_favorites', 'user_id', 'artist_id');
+    }
+
+    public function rates()
+    {
+        return $this->belongsToMany('App\Artist', 'user_rating', 'user_id', 'artist_id')->withPivot('rating');
+    }
 }
