@@ -17,12 +17,12 @@ class CreateRatingTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedInteger('rated_user_id')->index();
-            $table->foreign('rated_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('artist_id')->index();
+            $table->foreign('artist_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->tinyInteger('rating')->nullable(false);
 
-            $table->primary(['user_id', 'rated_user_id']);
+            $table->primary(['user_id', 'artist_id']);
         });
     }
 

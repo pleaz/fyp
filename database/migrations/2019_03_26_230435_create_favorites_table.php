@@ -17,10 +17,10 @@ class CreateFavoritesTable extends Migration
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedInteger('favorited_user_id')->index();
-            $table->foreign('favorited_user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('artist_id')->index();
+            $table->foreign('artist_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->primary(['user_id', 'favorited_user_id']);
+            $table->primary(['user_id', 'artist_id']);
         });
     }
 
