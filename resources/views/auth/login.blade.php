@@ -1,73 +1,91 @@
-@extends('layouts.app')
+<div id="login">
+    <h1>Welcome Back!</h1>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <form enctype="multipart/form-data" id="login" action="login" method="post" autocomplete="off">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div class="field-wrap">
+            <label for="email">
+                Email Address<span class="req">*</span>
+            </label>
+            <input id="email" type="email" required autocomplete="off" name="email" value="{{ old('email') }}" />
         </div>
-    </div>
+
+        <div class="field-wrap">
+            <label for="password">
+                Password<span class="req">*</span>
+            </label>
+            <input id="password" type="password" required autocomplete="off" name="password"/>
+        </div>
+
+        <p class="forgot"><a href="password/reset">Forgot Password?</a></p>
+
+        <button class="button button-block" name="login">Log In</button>
+
+    </form>
+
+    <script type="application/javascript">
+        $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+            var $this = $(this),
+                label = $this.prev('label');
+
+            if (e.type === 'keyup') {
+                if ($this.val() === '') {
+                    label.removeClass('active highlight');
+                } else {
+                    label.addClass('active highlight');
+                }
+            } else if (e.type === 'blur') {
+                if( $this.val() === '' ) {
+                    label.removeClass('active highlight');
+                } else {
+                    label.removeClass('highlight');
+                }
+            } else if (e.type === 'focus') {
+
+                if( $this.val() === '' ) {
+                    label.removeClass('highlight');
+                }
+                else if( $this.val() !== '' ) {
+                    label.addClass('highlight');
+                }
+            }
+
+        });
+
+        $('form#login').on('submit',function(e){
+            e.preventDefault();
+            $('.form-control').removeClass('is-invalid');
+            $('.invalid-feedback').remove();
+            $('.alert').remove();
+            let form = $(this);
+            form.find(':button[name=login]').prop('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(),
+                dataType: "json",
+                success: function(data) {
+                    window.location = data.url;
+                },
+                error: function(error) {
+                    form.find(':button[name=login]').prop('disabled', false);
+                    if(error.responseJSON.message){
+                        form.prepend('<div class="alert alert-warning" role="alert">'+error.responseJSON.message+'</div>');
+                    }
+                    if(error.responseJSON.errors) {
+                        $.each(error.responseJSON.errors, function (key, val) {
+                            var i = $('#' + key);
+                            i.addClass('is-invalid');
+                            $.each(val, function (k, v) {
+                                i.after('<div class="invalid-feedback">' + v + '</div>');
+                            });
+                        });
+                    }
+                }
+            });
+
+        });
+    </script>
+
 </div>
-@endsection

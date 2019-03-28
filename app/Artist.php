@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Artist extends Model
 {
+    public $timestamps = false;
+
     protected $table = 'artist_users';
 
     protected $fillable = [
