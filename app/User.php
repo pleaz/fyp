@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Artist', 'user_rating', 'user_id', 'artist_id')->withPivot('rating');
     }
+
+    public function files()
+    {
+        return $this->hasMany('App\File');
+    }
 }

@@ -25,7 +25,7 @@
 
     <main>
         <div class="stars">
-            <h5>Artist rating {{$avg_rating}}</h5>
+            <h5>Artist rating {{@$avg_rating}}</h5>
 
             @if(!Auth()->user()->artist()->exists())
             <div style="margin-left: 18px;" class="rating" id="product1">
@@ -128,53 +128,46 @@
             <div class="wrapper">
                 <h2>Gallery</h2>
 
+                @if($user->files)
                 <div class="gallery-container">
+                    @foreach($user->files as $file)
                     <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
+                        <div><img src="/uploads/gallery/{{$file->file}}" style="width:235px; height:235px;"></div>
+                        <h3>{{$file->name}}</h3>
+                        <p>{{$file->description}}</p>
                     </a>
-                    <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
-                    </a>
-                    <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
-                    </a>
-                    <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
-                    </a>
-                    <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
-                    </a>
-                    <a href="#">
-                        <div></div>
-                        <h3>This is a title</h3>
-                        <p>This is a paragraph</p>
-                    </a>
+                    @endforeach
                 </div>
+                @endif
 
+                @if(Auth()->user()->id == $user->id)
                 <div class="gallery-upload">
-                   <form action="../../includes/gallery-upload.inc.php" method="post" enctype="multipart/form-data">
+                   <form action="/user/{{$user->id}}/photo" method="post" enctype="multipart/form-data">
+                       @csrf
                         <input type="text" name="filetitle" placeholder="image title">
                         <input type="text" name="filedesc" placeholder="image description">
                         <input type="file" name="file">
                         <button type="submit" name="sumbit">UPLOAD</button>
+
+                       @if ($errors->any())
+                           <div class="notification is-danger">
+                               <ul>
+                                   @foreach ($errors->all() as $error)
+                                       <li>{{ $error }}</li>
+                                   @endforeach
+                               </ul>
+                           </div>
+                       @endif
                    </form>
                 </div>
+
+                @endif
 
             </div>
         </section>
     </main>
 
-    @include('footer')
+   @include('footer')
 
 </div>
 </body>

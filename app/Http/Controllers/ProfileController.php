@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\User;
+use Image;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -56,6 +58,30 @@ class ProfileController extends Controller
 
         Auth()->user()->rates()->detach($user);
         Auth()->user()->rates()->attach($user, ['rating' => $value]);
+
+        return back();
+
+    }
+
+    public function Photo(User $user)
+    {
+
+        request()->validate([
+            'filetitle' => ['required', 'min:3', 'max:50'],
+            'filedesc' => ['required', 'min:3', 'max:500'],
+            'file' => ['required', 'image'],
+        ]);
+
+        $image = request()->file('file');
+        $filename = time().'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(300, 300)->save( public_path('/uploads/gallery/' . $filename ) );
+
+        $file = new File();
+        $file->name = request()->filetitle;
+        $file->description = request()->filedesc;
+        $file->file = $filename;
+        $file->user()->associate($user);
+        $file->save();
 
         return back();
 
