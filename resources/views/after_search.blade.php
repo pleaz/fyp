@@ -19,16 +19,14 @@
     @include('nav_bar')
     <div id="filters">
         <form action="/search" method="post">
-
+            @csrf
             <input type="hidden" name="search" value="{{$query}}">
 
             <label for="styles">Filter by style</label>
             <select name="styles" id="styles">
-                <option>Standard lobe</option>
-                <option>Helix</option>
-                <option>Microdermal</option>
-                <option>Septum</option>
-                <option>Nose piercing</option>
+                @foreach(\App\Style::all() as $style)
+                <option value="{{$style->id}}">{{$style->style}}</option>
+                @endforeach
             </select>
 
             <label for="rating">Filter by rating</label>

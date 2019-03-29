@@ -21,13 +21,32 @@ class SearchController extends Controller
 
     public function search()
     {
+
         $artists = [];
         $query = Input::get('search');
         $cities = City::with('artists')->Where('city', 'like', '%' . $query . '%')->get();
         if(!$cities->isEmpty()){
             foreach ($cities as $city){
                 foreach($city->artists as $artist){
-                    $artists[] = $artist;
+                    if(Input::get('styles')) {
+                        $rates = [];
+                        foreach($artist->rated as $customer){
+                            $rates[] = $customer->pivot->rating;
+                        }
+                        if($rates) {
+                            $avg_rating = array_sum($rates)/count($rates);
+                        } else {
+                            $avg_rating = 0;
+                        }
+                        $rate = str_replace('+','',Input::get('rating'));
+
+                        if($artist->user->styles->contains(Input::get('styles')) && $avg_rating > $rate){
+                            $artists[] = $artist;
+                        }
+                    } else {
+                        $artists[] = $artist;
+                    }
+
                 }
             }
         }
