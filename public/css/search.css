@@ -1,0 +1,132 @@
+
+html{
+    font-family: 'Titillium Web', sans-serif;
+
+}
+
+#container{
+    height: 100%;
+}
+
+/*search bar*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+    background: #f2f2f2;
+}
+
+.search {
+    width: 100%;
+    position: relative
+}
+
+.searchTerm {
+    float: left;
+    width: 100%;
+    border: 3px solid #1ab188;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    color: #9DBFAF;
+}
+
+.searchTerm:focus{
+    color: #1ab188;
+}
+
+.searchButton {
+    position: absolute;
+    right: -50px;
+    width: 40px;
+    height: 36px;
+    border: 1px solid #1ab188;
+    background: #1ab188;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*navigation*/
+
+nav {
+    background: #1ab188;
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+}
+
+nav ul li ul {
+    display: none;
+    position: absolute;
+    background-color: #1ab188;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-top: 10%;
+
+}
+
+nav ul li ul li{
+    display: block;
+    text-align: center;
+    margin: auto;
+    padding: auto;
+}
+
+nav ul li:hover ul {
+    display: block;
+}
+
+nav ul li:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    margin-top: 2px;
+    background: white;
+    transition: all .3s linear;
+
+}
+
+nav ul li:hover:after {
+    width: 100%;
+
+}
+
+nav ul li ul li:hover:after {
+    width: 100%;
+}
+
+nav ul {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+    text-align: right;
+    padding-right:0.5rem;
+
+}
+
+nav ul li {
+    padding: .375rem .7rem;
+    position: relative;
+    display: inline-block;
+}
+
+nav ul li a {
+    color: #fff;
+    font-size: 1.3rem;
+    text-decoration: none;
+    font-weight: 600;
+}
