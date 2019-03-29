@@ -1,0 +1,369 @@
+
+#html {
+
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 1.1vw;
+  height:100%;
+}
+
+body{
+    background-color: rgba(19, 35, 47, 0.9);
+
+}
+
+#container{
+    position: relative;
+    top: 0;
+}
+
+h1{
+    color: white;
+}
+p{
+    color: white;
+    height: 100px;
+    padding-top: 2%;
+}
+
+h5{
+    color: white;
+    margin-left:5%;
+}
+
+.about{
+    height: 100%;
+    width: 88%;
+}
+
+.info {
+    color: #8a8a8a;
+}
+
+.info ul{
+    list-style: none;
+    padding-left: 0;
+
+}
+.info ul li{
+    border: solid;
+    border-bottom-color: #8a8a8a;
+    padding: 2%;
+    margin: 6%;
+    text-align: center;
+}
+
+main .pic {
+    padding: 0 1% 1% 1%;
+    width: 17%;
+    float: left;
+}
+
+main .pic img {
+    width: 100%;
+    margin-top: 0;
+    border-radius: 200px;
+}
+
+main .type .pic {
+  overflow: hidden;
+    margin-top: 0;
+    height: 700px; /* to avoid gallery floating to left */
+
+}
+
+main .type img {
+  width: 100%;
+}
+
+/* little icon next to h1*/
+
+main .type .circle {
+  float: left;
+  margin-right:10px ;
+  width: 50px;
+  height: 50px;
+  background: #1ab188;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+}
+
+main .type .circle .inner-circle {
+  width: 0;
+  height: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f7f7f7;
+  border-radius: 100%;
+  transition: all ease .3s;
+}
+
+main .type .circle:hover .inner-circle {
+  width: 46px;
+  height: 46px;
+}
+
+main .type .circle .icon {
+  position: absolute;
+  color: #fff;
+  transition: all ease .3s;
+  padding-left:10px;
+  font-size: 30px;
+}
+
+main .type .circle:hover .icon {
+  color: rgba(19, 35, 47, 0.9);
+}
+
+/* heart - favourite button styling */
+
+.button-like {
+    border: 2px solid #8a8a8a;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 1rem;
+    margin-left: 10%;
+    border-radius: 3rem;
+    color: #8a8a8a;
+    transition: all ease 0.4s;
+     width: 80%;
+
+}
+
+.button-like span {
+    margin-left: 0.5rem;
+}
+
+.button-like .fa,
+.button-like span {
+    transition: all ease 0.4s;
+}
+
+.button-like:focus {
+    background-color: transparent;
+}
+
+.button-like:focus .fa,
+.button-like:focus span {
+    color: #8a8a8a;
+}
+
+.button-like:hover {
+    border-color: #cc4b37;
+    background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+    color: #cc4b37;
+}
+
+.liked {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+    color: #fefefe;
+}
+
+.liked:focus {
+    background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+    color: #fefefe;
+}
+
+.liked:hover {
+    background-color: #cc4b37;
+    border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+    color: #fefefe;
+}
+
+/* star rating styling */
+
+.stars {
+	margin-left: 45%;
+	margin-right: auto;
+	width: 40%;
+	margin-top: 5%;
+	margin-bottom: 5%;
+	padding: 0;
+
+}
+
+ .stars h5 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.star {
+	background: none;
+	border: none;
+	font-size: 1em;
+	padding: 0 0.15em;
+}
+
+.star.selected {
+	color: gold;
+}
+
+.star{
+    color: white;
+}
+
+/* Visually hide an element, but leave it available for screen readers */
+	
+.screen-reader {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+form {
+  margin-left:18px;
+}
+
+label{
+  border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* gallery */
+
+
+.gallery-links h2 {
+    font-family: Catamaran;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.gallery-container a {
+    width: 230px;
+    margin: 20px 10px 0;
+    text-decoration: none;
+
+}
+
+.gallery-container a:hover {
+    opacity: 0.8;
+}
+
+.gallery-container a div {
+    width: 100%;
+    height: 235px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #8a8a8a;
+}
+
+.gallery-container a h3 {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    padding-top: 16px;
+    line-height: 26px;
+}
+
+.gallery-container a p {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    padding-top: 4px;
+    line-height: 20px;
+}
+/* gallery upload section */
+
+.gallery-upload {
+    width: 80%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: #424e58;
+}
+
+.gallery-upload h2 {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #111;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.gallery-upload form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.gallery-upload form input {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    padding: 0 15px;
+    border-radius: 100px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+}
+
+.gallery-upload-file-input {
+    padding-top: 8px !important;
+    background-color: #fefefe;
+}
+
+.gallery-upload form button {
+    width: 120px;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 100px;
+    box-shadow: none;
+    border: none;
+    background-color: #1ab188;
+    color: #fff;
+    font-weight: 700;
+}
+
+input:focus {
+    outline:none !important;
+}
+
+

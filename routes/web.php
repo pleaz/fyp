@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 Route::post('/search', 'SearchController@search');
+
+Route::get('/user/{user}', 'ProfileController@profile');
+Route::post('/user/{user}/like', 'ProfileController@like');
+Route::post('/user/{user}/unlike', 'ProfileController@unlike');

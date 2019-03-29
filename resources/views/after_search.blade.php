@@ -45,7 +45,7 @@
     <div id="gallery">
         @if($artists)
             @foreach($artists as $artist)
-                <a href="#">
+                <a href="/user/{{$artist->user->id}}">
                     <div><img src="/uploads/avatars/{{$artist->user->avatar}}" style="width:235px; height:235px;"></div>
                     <h3>{{$artist->user->name}}</h3>
                     <p>{{$artist->user->surname}}</p>

@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('artist_users', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
@@ -37,7 +38,7 @@ class CreateUsersTable extends Migration
             $table->text('postcode')->nullable(false);
             $table->unsignedSmallInteger('rating')->nullable();
 
-            $table->primary('user_id');
+            //$table->primary('user_id');
         });
 
     }
