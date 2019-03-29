@@ -25,27 +25,49 @@
 
     <main>
         <div class="stars">
-            <h5>Artist rating</h5>
+            <h5>Artist rating {{$avg_rating}}</h5>
 
-            <form class="rating" id="product1">
+            @if(!Auth()->user()->artist()->exists())
+            <div style="margin-left: 18px;" class="rating" id="product1">
                 <label for="rating">Star rating for content</label>
-                <button type="submit" class="star" data-star="1">
+                <form style="display: inline; margin-left: 0;" action="/user/{{$user->id}}/rating/1" method="post">
+                    @csrf
+                <button type="submit" class="star @if(@$rating>0) selected @endif " data-star="1">
                     <span aria-hidden="true">&#9733;</span>
                     <span class="screen-reader">1 Star</span>
-                </button><button type="submit" class="star" data-star="2">
+                </button>
+                </form>
+                <form style="display: inline; margin-left: 0;" action="/user/{{$user->id}}/rating/2" method="post">
+                    @csrf
+                <button type="submit" class="star @if(@$rating>1) selected @endif " data-star="2">
                     <span aria-hidden="true">&#9733;</span>
                     <span class="screen-reader">2 Stars</span>
-                </button><button type="submit" class="star" data-star="3">
+                </button>
+                </form>
+                <form style="display: inline; margin-left: 0;" action="/user/{{$user->id}}/rating/3" method="post">
+                    @csrf
+                <button type="submit" class="star @if(@$rating>2) selected @endif " data-star="3">
                     <span aria-hidden="true">&#9733;</span>
                     <span class="screen-reader">3 Stars</span>
-                </button><button type="submit" class="star" data-star="4">
+                </button>
+                </form>
+                <form style="display: inline; margin-left: 0;" action="/user/{{$user->id}}/rating/4" method="post">
+                    @csrf
+                <button type="submit" class="star @if(@$rating>3) selected @endif " data-star="4">
                     <span aria-hidden="true">&#9733;</span>
                     <span class="screen-reader">4 Stars</span>
-                </button><button type="submit" class="star" data-star="5">
+                </button>
+                </form>
+                <form style="display: inline; margin-left: 0;" action="/user/{{$user->id}}/rating/5" method="post">
+                    @csrf
+                <button type="submit" class="star @if(@$rating>4) selected @endif " data-star="5">
                     <span aria-hidden="true">&#9733;</span>
                     <span class="screen-reader">5 Stars</span>
                 </button>
-            </form>
+                </form>
+            </div>
+            @endif
+
         </div>
         <div class="type">
             <div class="pic">

@@ -12,7 +12,18 @@ class ProfileController extends Controller
 
         if($user->artist()->exists()) {
 
-            return view('artist_profile', compact('user'));
+            if(Auth()->user()->rates->contains($user->id)) {
+                $rated_user = Auth()->user()->rates->find($user->id);
+                $rating = $rated_user->pivot->rating;
+            }
+
+            $rates = [];
+            foreach($user->artist->rated as $customer){
+                $rates[] = $customer->pivot->rating;
+            }
+            if($rates) $avg_rating = array_sum($rates)/count($rates);
+
+            return view('artist_profile', compact('user', 'rating', 'avg_rating'));
 
         } else {
 
@@ -35,6 +46,16 @@ class ProfileController extends Controller
     {
 
         Auth()->user()->favorites()->detach($user);
+
+        return back();
+
+    }
+
+    public function Rating(User $user, $value)
+    {
+
+        Auth()->user()->rates()->detach($user);
+        Auth()->user()->rates()->attach($user, ['rating' => $value]);
 
         return back();
 

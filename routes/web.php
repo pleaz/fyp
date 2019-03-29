@@ -24,3 +24,4 @@ Route::post('/search', 'SearchController@search');
 Route::get('/user/{user}', 'ProfileController@profile');
 Route::post('/user/{user}/like', 'ProfileController@like');
 Route::post('/user/{user}/unlike', 'ProfileController@unlike');
+Route::post('/user/{user}/rating/{value}', 'ProfileController@rating');
