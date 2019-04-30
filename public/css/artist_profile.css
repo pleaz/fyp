@@ -12,6 +12,7 @@ body{
 }
 
 #container{
+    padding-bottom: 12rem;
     position: relative;
     top: 0;
 }
