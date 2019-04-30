@@ -30,7 +30,7 @@ class SearchController extends Controller
                 foreach($city->artists as $artist){
                     if(Input::get('styles')) {
                         $rates = [];
-                        foreach($artist->rated as $customer){
+                        foreach($artist->user->rated as $customer){
                             $rates[] = $customer->pivot->rating;
                         }
                         if($rates) {
