@@ -97,15 +97,15 @@
                             @if($user->favorites)
                                 <ul>
                                     @foreach($user->favorites as $favorite)
-                                        <li><a href="/user/{{$favorite->user->id}}">{{$favorite->user->name}}</a></li>
+                                        <li><a href="/user/{{$favorite->id}}">{{$favorite->name}}</a></li>
                                     @endforeach
                                 </ul>
                             @endif
                         </li>
                         <li>Favourited by
-                            @if($user->artist->favored)
+                            @if($user->favored)
                                 <ul>
-                                    @foreach($user->artist->favored as $favorited)
+                                    @foreach($user->favored as $favorited)
                                         <li><a href="/user/{{$favorited->id}}">{{$favorited->name}}</a></li>
                                     @endforeach
                                 </ul>

@@ -14,15 +14,17 @@ class ProfileController extends Controller
 
         if($user->artist()->exists()) {
 
+            $rating = 0;
             if(Auth()->user()->rates->contains($user->id)) {
                 $rated_user = Auth()->user()->rates->find($user->id);
                 $rating = $rated_user->pivot->rating;
             }
 
             $rates = [];
-            foreach($user->artist->rated as $customer){
+            foreach($user->rated as $customer){
                 $rates[] = $customer->pivot->rating;
             }
+            $avg_rating = 0;
             if($rates) $avg_rating = array_sum($rates)/count($rates);
 
             return view('artist_profile', compact('user', 'rating', 'avg_rating'));

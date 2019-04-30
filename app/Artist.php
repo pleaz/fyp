@@ -23,14 +23,4 @@ class Artist extends Model
     {
         return $this->belongsTo('App\City');
     }
-
-    public function favored()
-    {
-        return $this->belongsToMany('App\User', 'user_favorites');
-    }
-
-    public function rated()
-    {
-        return $this->belongsToMany('App\User', 'user_rating')->withPivot('rating');
-    }
 }

@@ -51,16 +51,26 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany('App\Artist', 'user_favorites', 'user_id', 'artist_id');
+        return $this->belongsToMany(self::class, 'user_favorites', 'user_id', 'artist_id');
     }
 
     public function rates()
     {
-        return $this->belongsToMany('App\Artist', 'user_rating', 'user_id', 'artist_id')->withPivot('rating');
+        return $this->belongsToMany(self::class, 'user_rating', 'user_id', 'artist_id')->withPivot('rating');
     }
 
     public function files()
     {
         return $this->hasMany('App\File');
+    }
+
+    public function favored()
+    {
+        return $this->belongsToMany(self::class, 'user_favorites', 'artist_id', 'user_id');
+    }
+
+    public function rated()
+    {
+        return $this->belongsToMany(self::class, 'user_rating', 'artist_id', 'user_id')->withPivot('rating');
     }
 }

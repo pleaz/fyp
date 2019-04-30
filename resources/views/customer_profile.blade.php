@@ -37,7 +37,7 @@
                         @if($user->favorites)
                             <ul>
                                 @foreach($user->favorites as $favorite)
-                                    <li><a href="/user/{{$favorite->user->id}}">{{$favorite->user->name}}</a></li>
+                                    <li><a href="/user/{{$favorite->id}}">{{$favorite->name}}</a></li>
                                 @endforeach
                             </ul>
                         @endif
